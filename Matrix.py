@@ -1,4 +1,5 @@
 from __future__ import annotations
+from PIL import Image, ImageOps
 
 class Matrix:
     # to create a matrix of ones set ones to true
@@ -74,3 +75,11 @@ class Matrix:
         re.append(self.columns)
         re.append(self.rows)
         return re
+    
+    def sobel_operation(self, sobeloperator:Matrix):
+        re = []
+
+        for i in range(1,self.columns-1):
+            for j in range(1,self.rows-1):
+                temp = self.matrix[i-1][j-1]*sobeloperator[0][0]+self.matrix[i][j-1]*sobeloperator[1][0]+self.matrix[i+1][j-1]*sobeloperator[2][0]+self.matrix[i-1][j]*sobeloperator[0][0]+self.matrix[i-1][j+1]*sobeloperator[0][0]+self.matrix[i-1][j-1]*sobeloperator[0][0]+
+
