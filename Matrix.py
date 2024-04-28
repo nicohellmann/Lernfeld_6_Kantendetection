@@ -1,5 +1,5 @@
 from __future__ import annotations
-from PIL import Image, ImageOps
+
 
 class Matrix:
     # to create a matrix of ones set ones to true
@@ -76,10 +76,19 @@ class Matrix:
         re.append(self.rows)
         return re
     
-    def sobel_operation(self, sobeloperator:Matrix):
+    def sobel_operation(self, sobeloperator_x:Matrix,sobeloperator_y:Matrix ):
         re = []
+        temp_x =0
+        temp_y=0
+        for i in range(1,self.rows-1):
+            list = []
+            for j in range(1,self.columns-1):
+                temp_x = self.matrix[i-1][j-1]*sobeloperator_x.matrix[0][0]+self.matrix[i-1][j]*sobeloperator_x.matrix[0][1]+self.matrix[i-1][j+1]*sobeloperator_x.matrix[0][2]+self.matrix[i][j-1]*sobeloperator_x.matrix[1][0]+self.matrix[i][j+1]*sobeloperator_x.matrix[1][2]+self.matrix[i+1][j-1]*sobeloperator_x.matrix[2][0]+self.matrix[i+1][j]*sobeloperator_x.matrix[2][1]+self.matrix[i+1][j+1]*sobeloperator_x.matrix[2][2]
 
-        for i in range(1,self.columns-1):
-            for j in range(1,self.rows-1):
-                temp = self.matrix[i-1][j-1]*sobeloperator[0][0]+self.matrix[i][j-1]*sobeloperator[1][0]+self.matrix[i+1][j-1]*sobeloperator[2][0]+self.matrix[i-1][j]*sobeloperator[0][0]+self.matrix[i-1][j+1]*sobeloperator[0][0]+self.matrix[i-1][j-1]*sobeloperator[0][0]+
+                temp_y = self.matrix[i-1][j-1]*sobeloperator_y.matrix[0][0]+self.matrix[i-1][j]*sobeloperator_y.matrix[0][1]+self.matrix[i-1][j+1]*sobeloperator_y.matrix[0][2]+self.matrix[i][j-1]*sobeloperator_y.matrix[1][0]+self.matrix[i][j+1]*sobeloperator_y.matrix[1][2]+self.matrix[i+1][j-1]*sobeloperator_y.matrix[2][0]+self.matrix[i+1][j]*sobeloperator_y.matrix[2][1]+self.matrix[i+1][j+1]*sobeloperator_y.matrix[2][2]
 
+                list.append(int((temp_y**2+temp_x**2)**0.5))
+
+            re.append(list)
+
+        return re
