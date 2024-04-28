@@ -5,17 +5,21 @@ import matplotlib.pyplot as plt
 auto = Image.open("Auto.jpg")
 print(auto.getpixel((100,100)))
 
-auto_gray = ImageOps.grayscale(auto)
+#auto_gray = ImageOps.grayscale(auto)
 
 list =[]
 
+#for i in range(1024):
+#    temp = []
+#    for j in range(768):
+#        temp.append(auto_gray.getpixel((i,j)))
+#
+#    list.append(temp)
 for i in range(1024):
     temp = []
     for j in range(768):
-        temp.append(auto_gray.getpixel((i,j)))
-
-    list.append(temp)
-
+        temp.append(int((auto.getpixel((i,j))[0]+auto.getpixel((i,j))[1]+auto.getpixel((i,j))[2])/3))        
+    list.append(temp)            
 auto_grey_matrix = Matrix(list)
 
 
